@@ -1,0 +1,6 @@
+services:
+  unknown_param:
+    class: %ns%\ClassWithUnknownParameterType
+
+imports:
+  - {resource: config.yml}

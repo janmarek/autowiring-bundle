@@ -1,0 +1,4 @@
+services:
+  example2:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithDefaultScalarArguments
+    arguments: [1, 2, 3, 4, 5, 6]

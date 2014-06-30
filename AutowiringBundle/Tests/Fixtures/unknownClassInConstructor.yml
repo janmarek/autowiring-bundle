@@ -1,0 +1,3 @@
+services:
+  classWithUnknownClassInConstructor:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithUnknownClassInConstructor

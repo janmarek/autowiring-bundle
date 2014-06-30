@@ -1,0 +1,13 @@
+services:
+  jan_marek.autowiring_bundle.tests.fixtures.class_with_unknown_parameter_type:
+    arguments: [blabla]
+
+  jan_marek.autowiring_bundle.tests.fixtures.example_class:
+    abstract: true
+
+  foobar:
+    parent: jan_marek.autowiring_bundle.tests.fixtures.example_class
+
+  # test class is not overriden
+  jan_marek.autowiring_bundle.tests.fixtures.class_with_constructor:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass

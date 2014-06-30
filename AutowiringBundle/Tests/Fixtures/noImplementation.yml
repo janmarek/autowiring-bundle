@@ -1,0 +1,6 @@
+services:
+  no_implementation:
+    class: %ns%\ClassWithNotAvailableArgument
+
+imports:
+  - {resource: config.yml}

@@ -1,0 +1,20 @@
+services:
+  example:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass
+
+  factory:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleFactory
+
+  withSetters:
+    factory_service: factory
+    factory_method: create
+    arguments:
+      foo: foo
+      bar: bar
+
+  example3:
+    factory_class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleFactory
+    factory_method: staticCreate
+    arguments:
+      bar: bar
+      foo: foo

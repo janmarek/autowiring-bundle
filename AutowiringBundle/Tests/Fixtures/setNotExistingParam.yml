@@ -1,0 +1,36 @@
+parameters:
+  foo: bar
+  param_one: 1
+  paramTwo: 2
+  bar: asd%foo%
+
+services:
+  JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass
+
+  JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass2:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass2
+
+  serviceExtending:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExtendingClass
+
+  withScalarArgs:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithScalarArgs
+    arguments:
+      paramOne: %foo%
+
+  withMiscArgs:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithScalarArgs
+    arguments:
+      bar: @withScalarArgs
+      foo: "@Medio\\Ioc\\ExampleClass"
+
+  withObjectArgs:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithConstructor
+    arguments:
+      c1: @serviceExtending
+
+  defaultArgs:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithDefaultScalarArguments
+    arguments:
+      param: bar

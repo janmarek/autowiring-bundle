@@ -1,0 +1,6 @@
+services:
+  example1:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithDefaultScalarArguments
+    arguments:
+      param: bar
+      nonExisting: true

@@ -1,0 +1,6 @@
+services:
+  conflict:
+    class: %ns%\ClassWithExtendingClassInConstructor
+
+imports:
+  - {resource: config.yml}

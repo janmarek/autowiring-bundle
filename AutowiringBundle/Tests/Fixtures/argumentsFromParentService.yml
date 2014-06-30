@@ -1,0 +1,11 @@
+services:
+  jan_marek.autowiring_bundle.tests.fixtures.example_class:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass
+  jan_marek.autowiring_bundle.tests.fixtures.example_class2:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass2
+  fooSuper:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\FooSuperClass
+    abstract: true
+  foo:
+    parent: fooSuper
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\FooClass

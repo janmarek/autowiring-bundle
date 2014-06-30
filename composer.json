@@ -1,0 +1,22 @@
+{
+    "name": "janmarek/autowiring-bundle",
+    "description": "Autowiring bundle for Symfony2",
+    "require": {
+        "symfony/framework-bundle": "*"
+    },
+    "require-dev": {
+        "janmarek/mockista": "dev-master"
+    },
+    "license": "BSD",
+    "autoload": {
+        "psr-4": {
+            "JanMarek\\AutowiringBundle\\": "AutowiringBundle/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jan Marek",
+            "email": "mail@janmarek.net"
+        }
+    ]
+}

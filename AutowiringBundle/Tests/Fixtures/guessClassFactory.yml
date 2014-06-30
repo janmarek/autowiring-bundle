@@ -1,0 +1,5 @@
+services:
+  class_not_exist:
+    factory_class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleFactory
+    factory_method: staticCreate
+    arguments: [@example, 'foo', 'bar']

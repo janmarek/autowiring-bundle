@@ -1,0 +1,16 @@
+parameters:
+  foo: bar
+  %foo%: test
+
+services:
+  foo%foo%:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithExpandedNameFoo%foo%
+  bar%foo%:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithExpandedNameFoo%foo%
+    factory_class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithExpandedNameFoo%foo%
+    factory_method: create%foo%
+  foobar%foo%:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithExpandedNameFoo%foo%
+    factory_service: "@foo%foo%"
+  barbar%%foo%%:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithExpandedNameFoo%foo%

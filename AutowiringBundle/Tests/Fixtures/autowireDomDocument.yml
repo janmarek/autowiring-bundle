@@ -1,0 +1,6 @@
+services:
+  domDocument:
+    class: DomDocument
+    arguments:
+      version: null
+      encoding: "iso-8859-1"

@@ -1,0 +1,18 @@
+parameters:
+  ns: JanMarek\AutowiringBundle\Tests\Fixtures
+
+services:
+  example:
+    class: %ns%\ExampleClass
+  example2:
+    class: %ns%\ExampleClass2
+  extending:
+    class: %ns%\ExtendingClass
+  with_constructor:
+    class: %ns%\ClassWithConstructor
+  configured:
+    class: %ns%\ClassWithExtendingClassInConstructor
+    arguments: ["@example", "@extending"]
+  default_args:
+    class: %ns%\ClassWithDefaultArguments
+  alias: @default_args

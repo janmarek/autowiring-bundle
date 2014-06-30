@@ -1,0 +1,14 @@
+parameters:
+  foo: fooParam
+  bar: barParam
+
+services:
+  example:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass
+
+  withSetters:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithSetters
+    calls:
+      - [someMethod, []]
+      - [setObject, []]
+      - [someMethod, {foo: xxx, bar: @example}]
