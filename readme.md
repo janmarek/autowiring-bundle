@@ -74,22 +74,42 @@ services:
 
 **Setting arguments by parameter name**
 
-You can set some service constructor or setter arguments by their name in PHP code. Other parameters would be autowired. 
+You can set some service constructor or setter arguments by their name in PHP code. Other parameters would be autowired.
+
+```php
+class ArgsByName
+{
+    public function __construct(Foo $foo, $namedArg)
+    {
+    
+    }
+
+    public function setBarAndSomethingElse(Bar $bar, $somethingElse) {
+        ...
+    }
+}
+```
 
 ```yaml
+parameters:
+    param1: 123
+    param2: 456
+
 services:
     service_foo:
         class: Foo
-        arguments:
-            bar: @service_bar
         
     service_bar:
         class: Bar
         
-    withSetters:
-        class: ClassWithSetters
+    service_with_args_by_name:
+        class: ArgsByName
+        arguments:
+            namedArg: %param1%
+            # params foo is autowired
         calls:
-            - [setObject, { bar: @service_bar }]
+            - [setObject, { somethingElse: %param2% }]
+            # param bar is autowired
 ```
 
 **Class guessing by naming convention**
@@ -100,9 +120,9 @@ separator.
 
 ```yaml
 services:
+    # class is automatically set to Vendor\NameSpace\ClassName
     vendor.name_space.class_name:
 ```
-
 
 License
 -------
