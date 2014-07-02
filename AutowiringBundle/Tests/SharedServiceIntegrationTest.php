@@ -25,7 +25,7 @@ class SharedServiceIntegrationTest extends BaseTestCase
 
 	public function testSharedService()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/sharedService.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/sharedService.yml');
 		$this->container->compile();
 
 		$one = $this->container->get('foo');

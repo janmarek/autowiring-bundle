@@ -28,7 +28,7 @@ class GuessClassPassTest extends BaseTestCase
 
 	public function testSimpleService()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/guessClass1.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/guessClass1.yml');
 		$this->object->process($this->builder);
 
 		$definition = $this->builder->getDefinition('jan_marek.autowiring_bundle.tests.fixtures.example_class');
@@ -37,7 +37,7 @@ class GuessClassPassTest extends BaseTestCase
 
 	public function testServiceWithArguments()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/guessClass2.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/guessClass2.yml');
 		$this->object->process($this->builder);
 
 		$definition = $this->builder->getDefinition(
@@ -48,7 +48,7 @@ class GuessClassPassTest extends BaseTestCase
 
 	public function testPassDoesNotOverrideDefinedClass()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/guessClass2.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/guessClass2.yml');
 		$this->object->process($this->builder);
 
 		$definition = $this->builder->getDefinition('jan_marek.autowiring_bundle.tests.fixtures.class_with_constructor');
@@ -57,7 +57,7 @@ class GuessClassPassTest extends BaseTestCase
 
 	public function testClassIsNotGuessedInAbstractDefinitions()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/guessClass2.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/guessClass2.yml');
 		$this->object->process($this->builder);
 
 		$definition = $this->builder->getDefinition('jan_marek.autowiring_bundle.tests.fixtures.example_class');
@@ -66,7 +66,7 @@ class GuessClassPassTest extends BaseTestCase
 
 	public function testClassIsNotGuessedInAbstractDefinitions2()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/guessClass2.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/guessClass2.yml');
 		$this->object->process($this->builder);
 
 		$definition = $this->builder->getDefinition('foobar');
@@ -75,7 +75,7 @@ class GuessClassPassTest extends BaseTestCase
 
 	public function testClassDoesNotExist()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/guessClassFactory.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/guessClassFactory.yml');
 		$this->object->process($this->builder);
 
 		$definition = $this->builder->getDefinition('class_not_exist');

@@ -27,7 +27,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAutowiring()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/config.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/config.yml');
 		$this->container->compile();
 
 		$ns = __NAMESPACE__ . '\Fixtures';
@@ -46,7 +46,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 	 */
 	public function testTooManyServices()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/conflict.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/conflict.yml');
 		$this->container->compile();
 	}
 
@@ -56,7 +56,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 	 */
 	public function testNoAvailableService()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/noImplementation.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/noImplementation.yml');
 		$this->container->compile();
 	}
 
@@ -66,13 +66,13 @@ class AutowiringIntegrationTest extends BaseTestCase
 	 */
 	public function testUnknownParamType()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/unknownParamType.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/unknownParamType.yml');
 		$this->container->compile();
 	}
 
 	public function testFindServiceByNamingConvention()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/findServiceByName.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/findServiceByName.yml');
 		$this->container->compile();
 
 		$this->assertInstanceOf(
@@ -83,7 +83,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAutowireFewArguments()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireSomething.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireSomething.yml');
 		$this->container->compile();
 
 		$service = $this->container->get('withScalarArgs');
@@ -104,7 +104,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAutowireDefaultArgsSetToNull()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireSomething.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireSomething.yml');
 		$this->container->compile();
 
 		$service = $this->container->get('defaultArgsSetToNull');
@@ -113,7 +113,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAutowireFewArgumentsInClassWithDefaultArguments()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireSomething.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireSomething.yml');
 		$this->container->compile();
 
 		$service = $this->container->get('defaultArgs');
@@ -122,7 +122,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAutowireDomDocument()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireDomDocument.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireDomDocument.yml');
 		$this->container->compile();
 
 		$service = $this->container->get('domDocument');
@@ -135,7 +135,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 	 */
 	public function testAutowireNonExisting1()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireNonExistingParam.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireNonExistingParam.yml');
 		$this->container->compile();
 
 		$service = $this->container->get('example1');
@@ -147,7 +147,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 	 */
 	public function testAutowireNonExisting2()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireNonExistingParam2.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireNonExistingParam2.yml');
 		$this->container->compile();
 
 		$service = $this->container->get('example2');
@@ -155,7 +155,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAutowireSetters()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireSetters.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireSetters.yml');
 		$this->container->compile();
 
 		$service = $this->container->get('withSetters');
@@ -170,7 +170,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAutowireFactory()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireFactory.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireFactory.yml');
 		$this->container->compile();
 
 		$service1 = $this->container->get('withSetters');
@@ -189,7 +189,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 	 */
 	public function testAutowireFactoryWithoutDefinedClass()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/autowireFactoryWithoutDefinedClass.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/autowireFactoryWithoutDefinedClass.yml');
 		$this->container->compile();
 
 		$service1 = $this->container->get('withSetters');
@@ -205,13 +205,13 @@ class AutowiringIntegrationTest extends BaseTestCase
 	 */
 	public function testUnknownClassInConstructor()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/unknownClassInConstructor.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/unknownClassInConstructor.yml');
 		$this->container->compile();
 	}
 
 	public function testClassWithInterface()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/classWithInterface.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/classWithInterface.yml');
 		$this->container->compile();
 
 		$object = $this->container->get('jan_marek.autowiring_bundle.tests.fixtures.class_that_needs_an_interface');
@@ -221,7 +221,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testAliases()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/config.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/config.yml');
 		$this->container->compile();
 
 		$defaultArgs = $this->container->get('alias');
@@ -230,7 +230,7 @@ class AutowiringIntegrationTest extends BaseTestCase
 
 	public function testConstructorArgumentsFromParentService()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/argumentsFromParentService.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/argumentsFromParentService.yml');
 		$this->container->compile();
 
 		$this->assertInstanceOf('JanMarek\AutowiringBundle\Tests\Fixtures\FooClass', $this->container->get('foo'));

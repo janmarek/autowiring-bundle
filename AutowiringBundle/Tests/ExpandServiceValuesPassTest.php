@@ -25,7 +25,7 @@ class ExpandServiceValuesPassTest extends BaseTestCase
 
 	public function testExpandingValues()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/expandServiceValues.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/expandServiceValues.yml');
 		$this->container->compile();
 
 		$this->assertFalse($this->container->has('foo%foo%'));
@@ -47,7 +47,7 @@ class ExpandServiceValuesPassTest extends BaseTestCase
 
 	public function testTwoPercentsAreNotReplaces()
 	{
-		$this->loader->load(__DIR__ . '/fixtures/expandServiceValues.yml');
+		$this->loader->load(__DIR__ . '/Fixtures/expandServiceValues.yml');
 		$this->container->compile();
 
 		$this->assertTrue($this->container->has('barbar%%foo%%'));
