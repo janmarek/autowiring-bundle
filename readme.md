@@ -1,4 +1,4 @@
-Autowiring bundle
+Autowiring bundle [![Build Status](https://secure.travis-ci.org/janmarek/autowiring-bundle.png?branch=master)](http://travis-ci.org/janmarek/autowiring-bundle)
 =================
 
 Installation instructions
@@ -96,7 +96,7 @@ services:
 
 If you don't set service class, AutowiringBundle converts service name to a class name and adds it to service definition
 if that class exists. Rules for conversion are - underscore names are converted to CamelCase and "." is used as namespace
-separator.
+separator.  
 
 ```yaml
 services:
