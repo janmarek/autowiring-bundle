@@ -1,5 +1,16 @@
-Autowiring bundle [![Build Status](https://secure.travis-ci.org/janmarek/autowiring-bundle.png?branch=master)](http://travis-ci.org/janmarek/autowiring-bundle)
+Autowiring Bundle [![Build Status](https://secure.travis-ci.org/janmarek/autowiring-bundle.png?branch=master)](http://travis-ci.org/janmarek/autowiring-bundle)
 =================
+
+The aim of this Symfony2 bundle is to simplify configuration of services in Symfony Dependency Injection Container.
+
+Autowiring
+----------
+
+In Symfony 2 you have to configure parameters of service constructors. But we can use type information to configure service
+arguments automatically. Autowiring uses PHP reflection to find out how the service constructor parameters look like and
+what types they have. Then if there is only one service with class that can be passed to that argument available in 
+the countainer, autowiring configures that argument automatically for you. Otherwise exception is thrown and you have to
+configure service manually like you usually do.
 
 Installation instructions
 -------------------------
@@ -16,11 +27,11 @@ Enable bundle in your application kernel.
 // app/AppKernel.php
 public function registerBundles()
 {
-    return array(
+    return [
         // ...
         new JanMarek\AutowiringBundle\JanMarekAutowiringBundle(),
         // ...
-    );
+    ];
 }
 ```
 
@@ -32,7 +43,8 @@ Features
 ```php
 class Foo
 {
-    public function __construct(Bar $bar) {
+    public function __construct(Bar $bar)
+    {
         ...
     }
 }
@@ -58,7 +70,8 @@ services:
 ```php
 class ClassWithSetters
 {
-    public function setObject(Bar $bar) {
+    public function setObject(Bar $bar)
+    {
         ...
     }
 }
@@ -84,7 +97,8 @@ class ArgsByName
     
     }
 
-    public function setBarAndSomethingElse(Bar $bar, $somethingElse) {
+    public function setBarAndSomethingElse(Bar $bar, $somethingElse)
+    {
         ...
     }
 }
@@ -122,6 +136,49 @@ separator.
 services:
     # class is automatically set to Vendor\NameSpace\ClassName
     vendor.name_space.class_name:
+```
+
+**Conflict prevention**
+
+If constructor needs a service and there are more services implementing given interface,
+autowiring can't normally choose one of them and throws an exception.
+
+But if you name service using naming convention described in previous section, it would be 
+used as a default service in conflict situation.
+
+```php
+namespace NameSpace;
+
+class Foo
+{
+    public function __construct(Bar $bar)
+    {
+        ...
+    }
+}
+
+class Bar
+{
+    public function __construct($value)
+    {
+    
+    }
+}
+```
+
+```yaml
+services:
+    name_space.bar:
+        class: NameSpace\Bar
+        arguments: [123]
+        
+    other_bar:
+        class: NameSpace\Bar
+        arguments: [456]
+        
+    name_space.foo:
+        class: NameSpace\Foo
+        # service name_space.bar is autowired to constructor
 ```
 
 License
