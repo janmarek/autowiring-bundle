@@ -10,7 +10,7 @@
     "license": "BSD",
     "autoload": {
         "psr-4": {
-            "JanMarek\\AutowiringBundle\\": "AutowiringBundle/"
+            "JanMarek\\AutowiringBundle\\": ""
         }
     },
     "authors": [
