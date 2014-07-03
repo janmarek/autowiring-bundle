@@ -8,8 +8,8 @@ Autowiring
 
 In Symfony 2 you have to configure parameters of service constructors. But we can use type information to configure service
 arguments automatically. Autowiring uses PHP reflection to find out how the service constructor parameters look like and
-what types they have. Then if there is only one service with class that can be passed to that argument available in 
-the countainer, autowiring configures that argument automatically for you. Otherwise exception is thrown and you have to
+what types they have. Then it searches the container for services with classes that can be passed to that argument.
+If there is only one, autowiring configures that argument automatically for you. Otherwise exception is thrown and you have to
 configure service manually like you usually do.
 
 Installation instructions
