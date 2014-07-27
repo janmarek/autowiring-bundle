@@ -1,6 +1,7 @@
 parameters:
   foo: fooParam
   bar: barParam
+  class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleFactory
 
 services:
   example:
@@ -17,6 +18,13 @@ services:
   example3:
     class: JanMarek\AutowiringBundle\Tests\Fixtures\Example3
     factory_class: JanMarek\AutowiringBundle\Tests\Fixtures\ExampleFactory
+    factory_method: staticCreate
+    arguments:
+      bar: bar
+
+  example4:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\Example3
+    factory_class: %class%
     factory_method: staticCreate
     arguments:
       bar: bar

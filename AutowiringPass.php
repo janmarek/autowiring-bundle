@@ -63,7 +63,9 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 		}
 
 		if ($factoryClass) {
-			$method = new ReflectionMethod($factoryClass, $definition->getFactoryMethod());
+			$parameterBag = $container->getParameterBag();
+
+			$method = new ReflectionMethod($parameterBag->resolveValue($factoryClass), $definition->getFactoryMethod());
 			$autowiredArgs = $this->autowireMethod($method, $definition->getArguments(), $classes, $id, $container);
 			$definition->setArguments($autowiredArgs);
 		}
