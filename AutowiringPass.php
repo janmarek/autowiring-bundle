@@ -27,7 +27,7 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 		$classes = $this->getClasses($container);
 
 		foreach ($container->getDefinitions() as $id => $definition) {
-			if ($definition->isAbstract() || $definition->isSynthetic()) {
+			if (!$definition->isPublic() || $definition->isAbstract() || $definition->isSynthetic()) {
 				continue;
 			}
 

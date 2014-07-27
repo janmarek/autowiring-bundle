@@ -1,0 +1,7 @@
+services:
+  private:
+    class: %ns%\ClassThatNeedsAnInterface
+    public: false
+
+imports:
+  - {resource: config.yml}
