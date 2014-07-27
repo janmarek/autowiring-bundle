@@ -5,7 +5,8 @@
         "symfony/framework-bundle": "*"
     },
     "require-dev": {
-        "janmarek/mockista": "dev-master"
+        "janmarek/mockista": "dev-master",
+        "phpunit/phpunit": "~4.1"
     },
     "license": "BSD",
     "autoload": {
