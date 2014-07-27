@@ -1,0 +1,7 @@
+services:
+  parent_without_class:
+    abstract: true
+
+  child_with_class:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithAnInterface
+    parent: parent_without_class

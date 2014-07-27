@@ -20,8 +20,13 @@ class ExpandServiceValuesPass implements \Symfony\Component\DependencyInjection\
 				$container->setDefinition($alias, $definition);
 				$container->removeDefinition($id);
 			}
-			$definition->setClass($parameterBag->resolveValue($definition->getClass()));
-			$definition->setFactoryMethod($parameterBag->resolveValue($definition->getFactoryMethod()));
+
+			if ($definition->getClass() !== NULL) {
+				$definition->setClass($parameterBag->resolveValue($definition->getClass()));
+			}
+			if ($definition->getFactoryMethod() !== NULL) {
+				$definition->setFactoryMethod($parameterBag->resolveValue($definition->getFactoryMethod()));
+			}
 		}
 	}
 

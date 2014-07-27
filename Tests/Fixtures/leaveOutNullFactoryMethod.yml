@@ -1,0 +1,9 @@
+services:
+  parent_without_factory_method:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithAnInterface
+    abstract: true
+
+  child_with_factory_method:
+    factory_method: baf
+    parent: parent_without_factory_method
+
