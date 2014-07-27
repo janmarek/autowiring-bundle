@@ -238,7 +238,7 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 			return new Reference($service);
 		}
 
-		return $this->findByClass($classReflection, $classes, $serviceName);
+		return $this->findByClass($classReflection, $classes, $serviceName, $container);
 	}
 
 	/**
@@ -283,20 +283,45 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 	 * @param string $serviceName
 	 * @return Reference
 	 */
-	private function findByClass(ReflectionClass $reflection, array $classes, $serviceName)
+	private function findByClass(ReflectionClass $reflection, array $classes, $serviceName, ContainerBuilder $container)
 	{
 		$class = $reflection->getName();
+		$availableClasses = $this->findAvailableClasses($classes, $class, $container);
 
 		// if one suitable service found, return it
-		if (isset($classes[$class])) {
-			if (count($classes[$class]) === 1) {
-				return new Reference($classes[$class][0]);
+		if (isset($availableClasses[$class])) {
+			if (count($availableClasses[$class]) === 1) {
+				return new Reference($availableClasses[$class][0]);
 			} else {
-				throw new AutowiringException('Too many services implemented by class ' . $class . ' (' . implode(', ', $classes[$class]) . ') required by service ' . $serviceName . '.');
+				throw new AutowiringException('Too many services implemented by class ' . $class . ' (' . implode(', ', $availableClasses[$class]) . ') required by service ' . $serviceName . '.');
 			}
 		} else {
 			throw new AutowiringException("There is no service implementing '" . $class . "' in container required by service '" . $serviceName . "'.");
 		}
+	}
+
+
+	/**
+	 * @param array $classes
+	 * @param $requiredClass
+	 * @param ContainerBuilder $container
+	 * @return array
+	 */
+	private function findAvailableClasses(array $classes, $requiredClass, ContainerBuilder $container)
+	{
+		if (!isset($classes[$requiredClass])) {
+			return [];
+		}
+
+		$available = [];
+		foreach ($classes[$requiredClass] as $class => $id) {
+			$definition = $container->getDefinition($id);
+			if ($definition->isAbstract() || $definition->isSynthetic()) {
+				continue;
+			}
+			$available[$requiredClass][] = $id;
+		}
+		return $available;
 	}
 
 }
