@@ -40,6 +40,12 @@ class AutowiringIntegrationTest extends BaseTestCase
 		$this->assertEquals(array(NULL, 123), $defaultArgs->getArgs());
 	}
 
+	public function testSkipsAbstractDefinitions()
+	{
+		$this->loader->load(__DIR__ . '/Fixtures/skipAbstract.yml');
+		$this->container->compile();
+	}
+
 	/**
 	 * @expectedException JanMarek\AutowiringBundle\AutowiringException
 	 * @expectedExceptionMessage Too many services implemented by class JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass (example, extending) required by service conflict.
