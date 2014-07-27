@@ -46,6 +46,12 @@ class AutowiringIntegrationTest extends BaseTestCase
 		$this->container->compile();
 	}
 
+	public function testSkipsSyntheticDefinitions()
+	{
+		$this->loader->load(__DIR__ . '/Fixtures/skipSynthetic.yml');
+		$this->container->compile();
+	}
+
 	/**
 	 * @expectedException JanMarek\AutowiringBundle\AutowiringException
 	 * @expectedExceptionMessage Too many services implemented by class JanMarek\AutowiringBundle\Tests\Fixtures\ExampleClass (example, extending) required by service conflict.
