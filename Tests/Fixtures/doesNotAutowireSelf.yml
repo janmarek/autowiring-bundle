@@ -1,0 +1,5 @@
+services:
+  jan_marek.autowiring_bundle.tests.fixtures.class_with_interface:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithInterface
+  jan_marek.autowiring_bundle.tests.fixtures.class_that_needs_an_interface_with_an_interface:
+    class: JanMarek\AutowiringBundle\Tests\Fixtures\ClassThatNeedsAnInterfaceWithAnInterface

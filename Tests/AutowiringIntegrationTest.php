@@ -257,6 +257,16 @@ class AutowiringIntegrationTest extends BaseTestCase
 		$this->assertInstanceOf('JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithInterface', $object->getInterface());
 	}
 
+	public function testDoesNotAutowireSelf()
+	{
+		$this->loader->load(__DIR__ . '/Fixtures/doesNotAutowireSelf.yml');
+		$this->container->compile();
+
+		$object = $this->container->get('jan_marek.autowiring_bundle.tests.fixtures.class_that_needs_an_interface_with_an_interface');
+		$this->assertInstanceOf('JanMarek\AutowiringBundle\Tests\Fixtures\ClassThatNeedsAnInterfaceWithAnInterface', $object);
+		$this->assertInstanceOf('JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithInterface', $object->getInterface());
+	}
+
 	public function testAliases()
 	{
 		$this->loader->load(__DIR__ . '/Fixtures/config.yml');

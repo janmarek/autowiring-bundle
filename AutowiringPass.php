@@ -288,7 +288,7 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 	private function findByClass(ReflectionClass $reflection, array $classes, $serviceName, ContainerBuilder $container)
 	{
 		$class = $reflection->getName();
-		$availableClasses = $this->findAvailableClasses($classes, $class, $container);
+		$availableClasses = $this->findAvailableClasses($classes, $class, $serviceName, $container);
 
 		// if one suitable service found, return it
 		if (isset($availableClasses[$class])) {
@@ -309,7 +309,7 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 	 * @param ContainerBuilder $container
 	 * @return array
 	 */
-	private function findAvailableClasses(array $classes, $requiredClass, ContainerBuilder $container)
+	private function findAvailableClasses(array $classes, $requiredClass, $serviceName, ContainerBuilder $container)
 	{
 		if (!isset($classes[$requiredClass])) {
 			return [];
@@ -318,7 +318,7 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 		$available = [];
 		foreach ($classes[$requiredClass] as $class => $id) {
 			$definition = $container->getDefinition($id);
-			if ($definition->isAbstract() || $definition->isSynthetic()) {
+			if ($definition->isAbstract() || $definition->isSynthetic() || $serviceName === $id) {
 				continue;
 			}
 			$available[$requiredClass][] = $id;
