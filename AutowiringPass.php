@@ -168,9 +168,10 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
 		$names = array_map(function ($param) {
 			return $param->getName();
 		}, $parameters);
+		$parametersNumber = count($names);
 
 		foreach ($beforeAutowireArgs as $key => $value) {
-			if (empty($parameters[$key]) && !in_array($key, $names, TRUE)) {
+			if (empty($parameters[$key]) && !in_array($key, $names, TRUE) && $key < $parametersNumber) {
 				$class = $container->getParameterBag()->resolveValue($container->getDefinition($serviceName)->getClass());
 				$paramText = is_numeric($key) ? 'at position ' . $key . ' (indexed by 0)' : '$' . $key;
 				throw new AutowiringException(

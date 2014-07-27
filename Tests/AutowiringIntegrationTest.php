@@ -159,10 +159,6 @@ class AutowiringIntegrationTest extends BaseTestCase
 		$service = $this->container->get('example1');
 	}
 
-	/**
-	 * @expectedException JanMarek\AutowiringBundle\AutowiringException
-	 * @expectedExceptionMessage Parameter at position 3 (indexed by 0) in JanMarek\AutowiringBundle\Tests\Fixtures\ClassWithDefaultScalarArguments::__construct() (service example2) does not exist.
-	 */
 	public function testAutowireNonExisting2()
 	{
 		$this->loader->load(__DIR__ . '/Fixtures/autowireNonExistingParam2.yml');
