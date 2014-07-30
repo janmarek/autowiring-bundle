@@ -14,19 +14,19 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class GuessClassPass implements \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
 
-	/**
-	 * @param ContainerBuilder $container
-	 */
-	public function process(ContainerBuilder $container)
-	{
-		foreach ($container->getDefinitions() as $id => $definition) {
+    /**
+     * @param ContainerBuilder $container
+     */
+    public function process(ContainerBuilder $container)
+    {
+        foreach ($container->getDefinitions() as $id => $definition) {
             $className = strtr(Container::camelize($id), '_', '\\');
 
-			/** @var \Symfony\Component\DependencyInjection\Definition $definition */
-			if ($definition->getClass() === NULL && !$definition->isAbstract() && (class_exists($className) || interface_exists($className))) {
-				$definition->setClass($className);
-			}
-		}
-	}
+            /** @var \Symfony\Component\DependencyInjection\Definition $definition */
+            if ($definition->getClass() === NULL && !$definition->isAbstract() && (class_exists($className) || interface_exists($className))) {
+                $definition->setClass($className);
+            }
+        }
+    }
 
 }
