@@ -9,7 +9,7 @@ class ChangesLogPass implements \Symfony\Component\DependencyInjection\Compiler\
 {
 
     /** @var array[] */
-    public $changes = [];
+    public $changes = array();
 
     /**
      * @param ContainerBuilder $container

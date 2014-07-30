@@ -51,9 +51,9 @@ class ExpandServiceValuesPassTest extends BaseTestCase
         $this->loader->load(__DIR__ . '/Fixtures/leaveOutNullClass.yml');
         $this->container->compile();
 
-        $this->assertSame([
+        $this->assertSame(array(
             'class' => TRUE,
-        ], $pass->changes['child_with_class']);
+        ), $pass->changes['child_with_class']);
     }
 
     public function testLeaveOutNullFactoryMethod()
@@ -62,9 +62,9 @@ class ExpandServiceValuesPassTest extends BaseTestCase
         $this->loader->load(__DIR__ . '/Fixtures/leaveOutNullFactoryMethod.yml');
         $this->container->compile();
 
-        $this->assertSame([
+        $this->assertSame(array(
             'factory_method' => TRUE,
-        ], $pass->changes['child_with_factory_method']);
+        ), $pass->changes['child_with_factory_method']);
     }
 
     public function testTwoPercentsAreNotReplaces()

@@ -313,10 +313,10 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
     private function findAvailableClasses(array $classes, $requiredClass, $serviceName, ContainerBuilder $container)
     {
         if (!isset($classes[$requiredClass])) {
-            return [];
+            return array();
         }
 
-        $available = [];
+        $available = array();
         foreach ($classes[$requiredClass] as $class => $id) {
             $definition = $container->getDefinition($id);
             if ($definition->isAbstract() || $definition->isSynthetic() || $serviceName === $id) {
