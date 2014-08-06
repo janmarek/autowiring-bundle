@@ -137,16 +137,21 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
     {
         $autowiredArgs = array();
 
-        $parameters = $method->getParameters();
+        $parameterReflections = $method->getParameters();
 
-        $this->checkAutowiredParamList($parameters, $beforeAutowireArgs, $serviceName, $container, $method);
+        $this->checkAutowiredParamList($parameterReflections, $beforeAutowireArgs, $serviceName, $container, $method);
 
-        foreach ($parameters as $i => $parameter) {
+        foreach ($parameterReflections as $i => $parameter) {
+            // parameter by position
             if (array_key_exists($i, $beforeAutowireArgs)) {
                 $autowiredArgs[] = $beforeAutowireArgs[$i];
+
+            // parameter by name
             } elseif (array_key_exists($parameter->getName(), $beforeAutowireArgs)) {
                 $autowiredArgs[] = $beforeAutowireArgs[$parameter->getName()];
-            } elseif ($parameter->isDefaultValueAvailable()){
+
+            // default value
+            } elseif ($parameter->isDefaultValueAvailable()) {
                 $autowiredArgs[] = $parameter->getDefaultValue();
             } else {
                 $autowiredArgs[] = $this->getParameterValue($parameter, $classes, $serviceName, $container, $method);
@@ -157,25 +162,24 @@ class AutowiringPass implements \Symfony\Component\DependencyInjection\Compiler\
     }
 
     /**
-     * @param ReflectionMethod[] $parameters
+     * @param ReflectionParameter[] $parameterReflections
      * @param mixed[] $beforeAutowireArgs
      * @param string $serviceName
      * @param ContainerBuilder $container
      * @param ReflectionMethod $method
      */
-    private function checkAutowiredParamList(array $parameters, array $beforeAutowireArgs, $serviceName, ContainerBuilder $container, ReflectionMethod $method)
+    private function checkAutowiredParamList(array $parameterReflections, array $beforeAutowireArgs, $serviceName, ContainerBuilder $container, ReflectionMethod $method)
     {
         $names = array_map(function ($param) {
             return $param->getName();
-        }, $parameters);
-        $parametersNumber = count($names);
+        }, $parameterReflections);
 
         foreach ($beforeAutowireArgs as $key => $value) {
-            if (empty($parameters[$key]) && !in_array($key, $names, TRUE) && $key < $parametersNumber) {
+            // check only string parameters
+            if (is_string($key) && empty($parameterReflections[$key]) && !in_array($key, $names, TRUE)) {
                 $class = $container->getParameterBag()->resolveValue($container->getDefinition($serviceName)->getClass());
-                $paramText = is_numeric($key) ? 'at position ' . $key . ' (indexed by 0)' : '$' . $key;
                 throw new AutowiringException(
-                    'Parameter ' . $paramText . ' in ' . $class . '::' . $method->getName() . '() ' .
+                    'Parameter $' . $key . ' in ' . $class . '::' . $method->getName() . '() ' .
                     '(service ' . $serviceName . ') does not exist.'
                 );
             }
